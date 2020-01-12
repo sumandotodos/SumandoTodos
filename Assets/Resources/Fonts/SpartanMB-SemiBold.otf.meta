@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: e1794f5c5f76447308dc53c453ca027f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Spartan MB
+  fontNames:
+  - Spartan MB
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b7c2dcbcb3dd94d7b8bb0390cbf61cde, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

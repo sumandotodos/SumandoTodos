@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 2646287f078954ff48d22d338327e213
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Fivo Sans
+  fontNames:
+  - Fivo Sans
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: eb49e7aba1c804b4b854610562db28b8, type: 3}
+  - {fileID: 12800000, guid: 9cc71fdffeade4b9e8ee0dfeeee247ed, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
