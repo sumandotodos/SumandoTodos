@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class QuestionnaireController : FGProgram
 {
@@ -20,6 +21,10 @@ public class QuestionnaireController : FGProgram
     public SliderManager SliderManager2;
     public SliderManager sliderManager3;
 
+    public InputField NameInput;
+    public InputField SchoolInput;
+    public InputField AddressInput;
+
     public UITMPFader ThanksForFader;
 
     public PersonalInfoController personalInfoController;
@@ -27,6 +32,8 @@ public class QuestionnaireController : FGProgram
     int Question1Value;
     int Question2Value;
     int Question3Value;
+
+    Questionaire QuestionnaireValue = new Questionaire();
 
     // Start is called before the first frame update
     void Start()
@@ -139,23 +146,48 @@ public class QuestionnaireController : FGProgram
     {
         Question1Value = Mathf.FloorToInt(Slider1.GetComponentInChildren<Slider>().value);
         SliderManager1.SetValue(Question1Value);
+        QuestionnaireValue.Question1 = Question1Value;
     }
 
     public void OnQuestion2SliderChange()
     {
         Question2Value = Mathf.FloorToInt(Slider2.GetComponentInChildren<Slider>().value);
         SliderManager2.SetValue(Question2Value);
+        QuestionnaireValue.Question2 = Question2Value;
     }
 
     public void OnDurationSliderChange()
     {
         Question3Value = Mathf.FloorToInt(Slider3.GetComponentInChildren<Slider>().value);
         sliderManager3.SetValue(Question3Value);
+        QuestionnaireValue.Question3 = Question3Value;
     }
 
     public void Publish()
     {
-        // REST API
+        StartCoroutine(RESTAPIPublishCoroutine());
+
+    }
+
+    IEnumerator RESTAPIPublishCoroutine()
+    {
+        QuestionnaireValue.Name = NameInput.text;
+        QuestionnaireValue.School = SchoolInput.text;
+        QuestionnaireValue.Address = AddressInput.text;
+        UnityWebRequest newReq;
+        WWWForm form = new WWWForm();
+        form.AddField("Question1", QuestionnaireValue.Question1);
+        form.AddField("Question2", QuestionnaireValue.Question2);
+        form.AddField("Question3", QuestionnaireValue.Question3);
+        form.AddField("YouAre", QuestionnaireValue.YouAre);
+        form.AddField("Name", QuestionnaireValue.Name);
+        form.AddField("School", QuestionnaireValue.School);
+        form.AddField("Address", QuestionnaireValue.Address);
+        newReq = UnityWebRequest.Post(Config.ServerURL + "/questionnaire", form);
+        newReq.SetRequestHeader("psk", Config.PSK);
+        newReq.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        yield return newReq.SendWebRequest();
+
     }
 
 

@@ -4845,6 +4845,9 @@ MonoBehaviour:
   SliderManager1: {fileID: 1543914989}
   SliderManager2: {fileID: 2007214915}
   sliderManager3: {fileID: 855301879}
+  NameInput: {fileID: 1954002691}
+  SchoolInput: {fileID: 1531447065}
+  AddressInput: {fileID: 487822792}
   ThanksForFader: {fileID: 913198725}
   personalInfoController: {fileID: 1368102338}
 --- !u!1 &344345739
@@ -21369,7 +21372,7 @@ MonoBehaviour:
     linkCount: 0
     lineCount: 8
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -38660,7 +38663,7 @@ MonoBehaviour:
     linkCount: 0
     lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

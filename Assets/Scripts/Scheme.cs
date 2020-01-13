@@ -11,6 +11,12 @@ public class Questionaire
     public string Name;
     public string School;
     public string Address;
+
+    public Questionaire()
+    {
+        Question1 = Question2 = Question3 = YouAre = 0;
+        Name = School = Address = "";
+    }
 }
 
 public class Scheme : MonoBehaviour
