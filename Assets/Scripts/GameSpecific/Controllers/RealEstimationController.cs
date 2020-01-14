@@ -45,7 +45,9 @@ public class RealEstimationController : FGProgram {
     public UIGeneralFader YourEstimationAmountFader;
     public UIGeneralFader EstimationRegisterOKFader;
     public HistogramComponent HistogramRenderer;
+    public UIGeneralFader averageIndividualErrorLabel;
     public UIGeneralFader totalAverageLabel;
+    public UIGeneralFader overallErrorLabel;
     public UITextFader codeNotFoundFader;
     public Transform winSpawnLocation;
     public GameObject winPrefab;
@@ -210,6 +212,17 @@ public class RealEstimationController : FGProgram {
 
         HistogramData data = StatsUtils.Histogram(CurrentVotes, -1);
 
+        int ActualAmount = CurrentRealAmount;
+        float Average = StatsUtils.Average(CurrentVotes);
+        float AverageIndividualError = StatsUtils.GetAverageIndividualError(CurrentVotes, ActualAmount);
+        float IndividualErrorPercentage = StatsUtils.ErrorToPercetage(ActualAmount, AverageIndividualError);
+        float OverallError = Mathf.Abs((float)ActualAmount - Average);
+        float OverallErrorPercentage = StatsUtils.ErrorToPercetage(ActualAmount, OverallError);
+        int IntegerErrorPercentage = Mathf.FloorToInt(IndividualErrorPercentage);
+        int IntegerOverallPercentage = Mathf.FloorToInt(OverallErrorPercentage);
+
+        averageIndividualErrorLabel.GetComponent<Text>().text = "Error individual promedio: " + IntegerErrorPercentage + "%";
+        overallErrorLabel.GetComponent<Text>().text = "Error colectivo: " + IntegerOverallPercentage + "%";
         totalAverageLabel.GetComponent<Text>().text = "Promedio: " + StatsUtils.Average(CurrentVotes) + " garbanzos";
         actualLabel.GetComponent<Text>().text = "Cantidad real: " + CurrentRealAmount + " garbanzos";
         if (data.binCount.Count >= 3)

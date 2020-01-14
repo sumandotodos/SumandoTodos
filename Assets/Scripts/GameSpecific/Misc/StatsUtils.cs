@@ -15,6 +15,21 @@ public class HistogramData
 
 public class StatsUtils : MonoBehaviour
 {
+    public static float GetAverageIndividualError(List<int> r, int ActualAmount)
+    {
+        float Accumulator = 0.0f;
+        for (int i = 0; i < r.Count; ++i)
+        {
+            Accumulator += Mathf.Abs((float)(ActualAmount - r[i]));
+        }
+        Accumulator = (Accumulator) / ((float)r.Count);
+        return Accumulator;
+    }
+
+    public static float ErrorToPercetage(float Amount, float Error)
+    {
+        return (Error / Amount) * 100.0f;
+    }
 
     public static bool GetMinMax(List<int> r, out int min, out int max)
     {

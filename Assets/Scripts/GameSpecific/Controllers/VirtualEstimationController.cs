@@ -69,7 +69,9 @@ public class VirtualEstimationController : FGProgram {
     public UIGeneralFader CodeFader;
     public HistogramComponent HistogramRenderer;
     public UIGeneralFader totalAverageLabel;
+    public UIGeneralFader averageIndividualErrorLabel;
     public UIGeneralFader actualLabel;
+    public UIGeneralFader overallErrorLabel;
     public UITextFader codeNotFoundFader;
     public Transform winSpawnLocation;
     public GameObject winPrefab;
@@ -271,6 +273,8 @@ public class VirtualEstimationController : FGProgram {
         YourEstimationAmount.fadeToTransparent();
         totalAverageLabel.fadeToTransparent();
         actualLabel.fadeToTransparent();
+        overallErrorLabel.fadeToTransparent();
+        averageIndividualErrorLabel.fadeToTransparent();
         DeleteButton.fadeToTransparent();
 
         HistogramRenderer.GetComponent<UIGeneralFader>().fadeToTransparent();
@@ -810,8 +814,18 @@ public void SetBottleTypeOnServer()
 
             LoadSaveController.SaveVirtualGames();
         }
+        int ActualAmount = ActualAmountOfGarbanzos[chosenBottle];
+        float Average = StatsUtils.Average(CurrentVotes);
+        float AverageIndividualError = StatsUtils.GetAverageIndividualError(CurrentVotes, ActualAmount);
+        float IndividualErrorPercentage = StatsUtils.ErrorToPercetage(ActualAmount, AverageIndividualError);
+        float OverallError = Mathf.Abs((float)ActualAmount - Average);
+        float OverallErrorPercentage = StatsUtils.ErrorToPercetage(ActualAmount, OverallError);
+        int IntegerErrorPercentage = Mathf.FloorToInt(IndividualErrorPercentage);
+        int IntegerOverallPercentage = Mathf.FloorToInt(OverallErrorPercentage);
         totalAverageLabel.GetComponent<Text>().text = "Promedio: " + StatsUtils.Average(CurrentVotes) + " garbanzos";
+        averageIndividualErrorLabel.GetComponent<Text>().text = "Error individual promedio: " + IntegerErrorPercentage + "%";
         actualLabel.GetComponent<Text>().text = "Cantidad real: " + ActualAmountOfGarbanzos[chosenBottle] + " garbanzos";
+        overallErrorLabel.GetComponent<Text>().text = "Error colectivo: " + IntegerOverallPercentage + "%";
         if (data.binCount.Count >= 3)
         {
             HistogramRenderer.SetHistogram(data);
@@ -819,7 +833,9 @@ public void SetBottleTypeOnServer()
             HistogramRenderer.GetComponent<UIGeneralFader>().fadeToOpaque();
         }
         totalAverageLabel.fadeToOpaque();
+        averageIndividualErrorLabel.fadeToOpaque();
         actualLabel.fadeToOpaque();
+        overallErrorLabel.fadeToOpaque();
         if (CurrentIsOwner)
         {
             DeleteButton.fadeToOpaque();

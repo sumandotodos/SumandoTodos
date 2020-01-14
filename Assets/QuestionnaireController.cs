@@ -85,6 +85,13 @@ public class QuestionnaireController : FGProgram
         programNotifyFinish();
 
 
+        createSubprogram("Return");
+
+        execute(personalInfoController, "DismissAll");
+        execute(DoneButtonFader, "fadeToTransparent");
+        execute(NextButton2Fader, "fadeToTransparent");
+        execute(NextButtonFader, "fadeToTransparent");
+        programNotifyFinish();
 
         run();
          

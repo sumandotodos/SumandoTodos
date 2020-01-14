@@ -13,6 +13,7 @@ public class GoBackController : MonoBehaviour {
     public ImagineController imagineController;
     public CollaborationController collaborationController;
     public ShareController shareController;
+    public QuestionnaireController questionnaireController;
     public UIFader ButtonFader;
 
     Dictionary<string, System.Func<bool>> StateDictionary;
@@ -71,6 +72,7 @@ public class GoBackController : MonoBehaviour {
         StateDictionary["Imagine"] = ReturnFromImagine;
         StateDictionary["Collaboration"] = ReturnFromCollaboration;
         StateDictionary["Share"] = ReturnFromShare;
+        StateDictionary["Time"] = ReturnFromTime;
         showButtonWithDelay = ShowButtonWithDelay();
     }
 
@@ -95,6 +97,12 @@ public class GoBackController : MonoBehaviour {
     bool ReturnFromRealEstimation()
     {
         realEstimationController.goTo("Return");
+        return true;
+    }
+
+    bool ReturnFromTime()
+    {
+        questionnaireController.goTo("Return");
         return true;
     }
 

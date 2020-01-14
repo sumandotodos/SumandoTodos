@@ -33,8 +33,10 @@ public class MainScreenController : FGProgram {
     public CollaborationController collaborationController;
     public ShareController shareController;
     public QuestionnaireController questionnaireController;
+    public UIFader AppTitleFader;
 
-    public string ProfePDFAddress = "https://apps.flygames.org/pdf/GuiaDocentes.pdf";
+    public string ProfePDFAddress = 
+        "https://apps.flygames.org/pdf/GuiaDocentes.pdf";
 
     FGProgram programToWaitFor;
 
@@ -69,6 +71,8 @@ public class MainScreenController : FGProgram {
         waitForProgram(menuTipsController);
         execute(iconPressEnabler, "EnableAllButtons");
         execute(PointsFader, "fadeToOpaque");
+        delay(0.4f);
+        execute(uiController, "fadeAppTitleIn");
 
 
 
@@ -102,6 +106,7 @@ public class MainScreenController : FGProgram {
 
         createSubprogram("Time");
 
+        execute(uiController, "fadeAppTitleOut");
         execute(goBackController, "GoTo", "Time");
         execute(Overlay, "fadeToTransparent");
         execute(iconPressEnabler, "DisabeAllButtons");

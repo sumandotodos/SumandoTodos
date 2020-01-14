@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour {
     public GameObject Collaborate;
     public GameObject ThreeDeeStuff;
     public GameObject Questionnaire;
+    public UIFader AppTitleFader;
 
     public static UIController GetSingleton()
     {
@@ -32,6 +33,16 @@ public class UIController : MonoBehaviour {
         InitialState();
         instance = this;
 	}
+
+    public void fadeAppTitleIn()
+    {
+        AppTitleFader.fadeToOpaque();
+    }
+
+    public void fadeAppTitleOut()
+    {
+        AppTitleFader.fadeToTransparent();
+    }
 
     public void InitialState()
     {
